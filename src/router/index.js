@@ -2,6 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
+import Welcome from '../components/Welcome.vue'
+import Users from '../components/user/Users.vue'
+
+
+
 
 
 Vue.use(VueRouter)
@@ -19,6 +24,17 @@ Vue.use(VueRouter)
     {
       path:'/Home',
       component:Home,
+      redirect:'/Welcome',
+      children:[
+        {
+          path:'/Welcome',
+          component:Welcome
+        },
+        {
+          path:'/users',
+          component:Users
+        }
+      ]
     }
 
 ]
@@ -36,5 +52,7 @@ router.beforeEach((to,from,next)=>{
   if (!tokenstr)return next('/Login')
   next()
 })
+
+
 
 export default router
